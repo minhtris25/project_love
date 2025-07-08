@@ -15,7 +15,7 @@ const Home = () => {
               <br />
               Món quà anh dành cho em, nằm ở nút bấm. 🤗🤗
             </p>
-            <a href="/loveroom" className={styles.btn}>
+            <a href="/loveplanet" className={styles.btn}>
               Mở thư
             </a>
           </div>
