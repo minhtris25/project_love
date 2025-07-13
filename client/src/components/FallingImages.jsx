@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import img1 from '../assets/images/1.jpg';
 import img2 from '../assets/images/2.jpg';
 import img3 from '../assets/images/3.jpg';
@@ -50,9 +50,18 @@ const images = [
 ];
 
 export default function FallingImages() {
+  const [imageCount, setImageCount] = useState(250);
+
+  useEffect(() => {
+    // Nếu là thiết bị di động (chiều rộng <= 768), chỉ hiển thị 100 ảnh
+    if (window.innerWidth <= 768) {
+      setImageCount(100);
+    }
+  }, []);
+
   return (
     <div className="floating-images-container">
-      {Array.from({ length: 250 }).map((_, index) => {
+      {Array.from({ length: imageCount }).map((_, index) => {
         const size = Math.random() * 80 + 30;
         const startPosition = Math.random() * 100;
         const delay = Math.random() * 30;
