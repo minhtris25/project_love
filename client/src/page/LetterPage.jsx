@@ -3,6 +3,8 @@ import './LetterPage.css';
 import FallingImages from '../components/FallingImages';
 import LetterContent from '../components/LetterContent';
 
+import nhacnen from '../assets/sound/leduongbg.mp3';
+
 export default function LetterPage() {
   const [opened, setOpened] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -11,7 +13,7 @@ export default function LetterPage() {
   useEffect(() => {
     const openTimer = setTimeout(() => {
       setOpened(true);
-      setIsPlaying(true); // Bắt đầu phát nhạc khi opened = true
+      setIsPlaying(true);
       if (audioRef.current) {
         audioRef.current.play().catch((error) => {
           console.error('Lỗi khi phát nhạc tự động:', error);
@@ -39,18 +41,15 @@ export default function LetterPage() {
     <div className="letter-wrapper">
       {/* Nhạc nền */}
       <audio ref={audioRef} loop>
-        <source
-          src="assets/sound/leduongbg.mp3"
-          type="audio/mpeg"
-        />
-      
+        <source src={nhacnen} type="audio/mpeg" />
+        Trình duyệt của bạn không hỗ trợ audio.
       </audio>
 
-     
-
-      {/* Nội dung hiện có */}
+      {/* Hiệu ứng và nội dung */}
       {opened && <FallingImages />}
       <LetterContent opened={opened} />
+
+      
     </div>
   );
 }
