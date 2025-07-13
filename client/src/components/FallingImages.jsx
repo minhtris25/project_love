@@ -13,7 +13,7 @@ export default function FallingImages() {
         return (
           <img
             key={index}
-            src={`src/assets/images/${imageName}`}
+            src={`assets/images/${imageName}`}
             alt="Falling Image"
             className={`falling-drop ${isClockwise ? 'rotate-right' : 'rotate-left'}`}
             style={{

@@ -40,7 +40,7 @@ export default function LetterPage() {
       {/* Nhạc nền */}
       <audio ref={audioRef} loop>
         <source
-          src="src/assets/sound/leduongbg.mp3"
+          src="assets/sound/leduongbg.mp3"
           type="audio/mpeg"
         />
       
