@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import key1 from '../assets/sound/keyboard-1.mp3';
 import key2 from '../assets/sound/keyboard-2.mp3';
 import key3 from '../assets/sound/keyboard-3.mp3';
@@ -32,45 +32,56 @@ const texts = [
 
 export default function LetterContent({ opened }) {
   const [lines, setLines] = useState([]);
+  const intervalRef = useRef(null);
+  const lineIndexRef = useRef(0);
+  const charIndexRef = useRef(0);
+  const isMountedRef = useRef(false);
 
   useEffect(() => {
-    if (!opened) return;
-
-    let lineIndex = 0;
+    if (!opened || isMountedRef.current) return;
+    isMountedRef.current = true;
 
     const typeLine = () => {
+      const lineIndex = lineIndexRef.current;
       if (lineIndex >= texts.length) return;
 
       const line = texts[lineIndex];
-      let charIndex = 0;
       let typedLine = '';
 
-      const interval = setInterval(() => {
-        typedLine += line[charIndex] || '';
+      charIndexRef.current = 0;
+      intervalRef.current = setInterval(() => {
+        if (charIndexRef.current >= line.length) {
+          clearInterval(intervalRef.current);
+          lineIndexRef.current++;
+          setTimeout(typeLine, 800); // pause giữa dòng
+          return;
+        }
+
+        typedLine += line[charIndexRef.current];
         setLines(prev => {
           const updated = [...prev];
           updated[lineIndex] = typedLine;
           return updated;
         });
 
-        if (line[charIndex] !== ' ' && line[charIndex] !== undefined) {
+        if (line[charIndexRef.current] !== ' ') {
           const audio = keyAudios[Math.floor(Math.random() * keyAudios.length)];
           audio.currentTime = 0;
           audio.play();
         }
 
-        charIndex++;
-
-        if (charIndex >= line.length) {
-          clearInterval(interval);
-          lineIndex++;
-          setTimeout(typeLine, 800); // pause giữa các dòng
-        }
+        charIndexRef.current++;
       }, window.innerWidth <= 768 ? 35 : 75);
     };
 
-    setLines([]); // reset nếu mở lại
-    setTimeout(typeLine, 300); // delay ban đầu
+    setLines([]); // clear content
+    lineIndexRef.current = 0;
+    setTimeout(typeLine, 300);
+
+    return () => {
+      clearInterval(intervalRef.current);
+      isMountedRef.current = false;
+    };
   }, [opened]);
 
   return (
