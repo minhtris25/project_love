@@ -3,7 +3,7 @@ import './LetterPage.css';
 import FallingImages from '../components/FallingImages';
 import LetterContent from '../components/LetterContent';
 
-import nhacnen from '../assets/sound/leduongbg.mp3';
+import nhacnen from '../assets/sound/leduongBg.mp3';
 
 export default function LetterPage() {
   const [opened, setOpened] = useState(false);
