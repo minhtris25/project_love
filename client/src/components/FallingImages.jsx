@@ -51,12 +51,12 @@ const images = [
 
 export default function FallingImages() {
   const [imageCount, setImageCount] = useState(250);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Nếu là thiết bị di động (chiều rộng <= 768), chỉ hiển thị 100 ảnh
-    if (window.innerWidth <= 768) {
-      setImageCount(50);
-    }
+    const mobile = window.innerWidth <= 768;
+    setIsMobile(mobile);
+    if (mobile) setImageCount(70);
   }, []);
 
   return (
