@@ -45,7 +45,7 @@ export default function LetterContent({ opened }) {
           audio.volume = 0.15;
           audio.play();
         }
-      }, isMobile ? 35 : 80);
+      }, isMobile ? 35 : 60);
 
       return () => clearTimeout(timeout);
     } else {
