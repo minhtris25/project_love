@@ -55,7 +55,8 @@ export default function LetterContent({ opened }) {
       audio.volume = 0.15;
       audio.play();
     }
-  }, 80); // tốc độ gõ
+  }, window.innerWidth <= 768 ? 35 : 80); // nhanh hơn trên mobile
+ // tốc độ gõ
 
 
     
