@@ -27,8 +27,26 @@ import img20 from '../assets/images/20.jpg';
 import img21 from '../assets/images/21.jpg';
 import img22 from '../assets/images/22.jpg';
 import img23 from '../assets/images/23.jpg';
+import img24 from '../assets/images/24.jpg';
+import img25 from '../assets/images/25.jpg';
+import img26 from '../assets/images/26.jpg';
+import img27 from '../assets/images/27.jpg';
+import img28 from '../assets/images/28.jpg';
+import img29 from '../assets/images/29.jpg';
+import img30 from '../assets/images/30.jpg';
+import img31 from '../assets/images/31.jpg';
+import img32 from '../assets/images/32.jpg';
+import img33 from '../assets/images/33.jpg';
+import img34 from '../assets/images/34.jpg';
+import img35 from '../assets/images/35.jpg';
+import img36 from '../assets/images/36.jpg';
+import img37 from '../assets/images/37.jpg';
+import img38 from '../assets/images/38.jpg';
+import img39 from '../assets/images/39.jpg';
+import img40 from '../assets/images/40.jpg';
+import img41 from '../assets/images/41.jpg';
 
-import bgMusic from '../assets/Nhac.mp3';
+import bgMusic from '../assets/sound/Nhac.mp3'; // Đường dẫn đến file nhạc nền
 
 function LoveRoom() {
   useEffect(() => {
@@ -165,29 +183,10 @@ function LoveRoom() {
     ...(window.dataLove2Loveloom && window.dataLove2Loveloom.data.heartImages
       ? window.dataLove2Loveloom.data.heartImages
       : []),
-    img1,
-    img2,
-    img3,
-    img4,
-    img5,
-    img6,
-    img7,
-    img8,
-    img9,
-    img10,
-    img11,
-    img12,
-    img13,
-    img14,
-    img15,
-    img16,
-    img17,
-    img18,
-    img19,
-    img20,
-    img21,
-    img22,
-    img23,
+    img1, img2, img3, img4, img5, img6, img7, img8,img9, img10,
+    img11, img12, img13, img14, img15,img16, img17, img18, img19, img20,
+    img21, img22, img23,img24,img25,img26,img27,img28,img29,img30,
+    img31,img32,img33,img34,img35,img36,img37,img38,img39,img40,img41
   ];
 
     const textureLoader = new THREE.TextureLoader();
@@ -195,7 +194,7 @@ function LoveRoom() {
 
     // --- LOGIC DÙNG NỘI SUY ---
     const maxDensity = 15000;
-    const minDensity = 3200;
+    const minDensity = 2500;
     const maxGroupsForScale = 9;
 
     let pointsPerGroup;
@@ -1221,7 +1220,7 @@ function startCameraAnimation() {
   const zoomOutPos = { x: startPos.x, y: 0, z: startPos.z + 60 }; // Zoom ra
   const zoomInPos = { x: 0, y: 10, z: 20 }; // Zoom vào gần tinh cầu
   const throughPlanet = { x: 0, y: 10, z: -40 }; // Xuyên qua tinh cầu
-  const endPos = { x: 30, y: 5, z: 80 }; // Vị trí kết thúc
+  const endPos = { x: 24, y: 1, z: 80 }; // Vị trí kết thúc
 
   const duration1 = 0.28;  // Đi xuống
   const duration2 = 0.34;  // Zoom ra
