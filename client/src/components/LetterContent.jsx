@@ -6,12 +6,11 @@ import key4 from '../assets/sound/keyboard-4.mp3';
 import key5 from '../assets/sound/keyboard-5.mp3';
 import key6 from '../assets/sound/keyboard-6.mp3';
 
-// Preload âm thanh 1 lần duy nhất
-const soundSources = [key1, key2, key3, key4, key5, key6];
-const preloadedAudios = soundSources.map(src => {
-  const audio = new Audio(src);
-  audio.volume = 0.15;
-  return audio;
+// preload âm thanh
+const keyAudios = [key1, key2, key3, key4, key5, key6].map(src => {
+  const a = new Audio(src);
+  a.volume = 0.15;
+  return a;
 });
 
 const texts = [
@@ -32,36 +31,47 @@ const texts = [
 ];
 
 export default function LetterContent({ opened }) {
-  const [typedText, setTypedText] = useState('');
-  const [currentLine, setCurrentLine] = useState(0);
-  const [currentChar, setCurrentChar] = useState(0);
+  const [lines, setLines] = useState([]);
 
   useEffect(() => {
-    if (!opened || currentLine >= texts.length) return;
+    if (!opened) return;
 
-    if (currentChar < texts[currentLine].length) {
-      const timeout = setTimeout(() => {
-        setTypedText(prev => prev + texts[currentLine][currentChar]);
-        setCurrentChar(prev => prev + 1);
+    let lineIndex = 0;
 
-        if (texts[currentLine][currentChar] !== ' ') {
-          const audio = preloadedAudios[Math.floor(Math.random() * preloadedAudios.length)];
+    const typeLine = () => {
+      if (lineIndex >= texts.length) return;
+
+      const line = texts[lineIndex];
+      let charIndex = 0;
+      let typedLine = '';
+
+      const interval = setInterval(() => {
+        typedLine += line[charIndex] || '';
+        setLines(prev => {
+          const updated = [...prev];
+          updated[lineIndex] = typedLine;
+          return updated;
+        });
+
+        if (line[charIndex] !== ' ' && line[charIndex] !== undefined) {
+          const audio = keyAudios[Math.floor(Math.random() * keyAudios.length)];
           audio.currentTime = 0;
           audio.play();
         }
-      }, window.innerWidth <= 768 ? 35 : 80); // nhanh hơn trên mobile
 
-      return () => clearTimeout(timeout);
-    } else {
-      const timeout = setTimeout(() => {
-        setTypedText(prev => prev + '\n');
-        setCurrentLine(prev => prev + 1);
-        setCurrentChar(0);
-      }, 800);
+        charIndex++;
 
-      return () => clearTimeout(timeout);
-    }
-  }, [opened, currentChar, currentLine]);
+        if (charIndex >= line.length) {
+          clearInterval(interval);
+          lineIndex++;
+          setTimeout(typeLine, 800); // pause giữa các dòng
+        }
+      }, window.innerWidth <= 768 ? 35 : 75);
+    };
+
+    setLines([]); // reset nếu mở lại
+    setTimeout(typeLine, 300); // delay ban đầu
+  }, [opened]);
 
   return (
     <div className="letter-wrapper">
@@ -71,11 +81,12 @@ export default function LetterContent({ opened }) {
           <div className="body" />
         </div>
       )}
-
       {opened && (
         <div className="paper">
           <div className="typed-text">
-            {typedText}
+            {lines.map((line, i) => (
+              <div key={i}>{line}</div>
+            ))}
             <span className="blinking-cursor">|</span>
           </div>
         </div>
