@@ -55,7 +55,7 @@ export default function FallingImages() {
   useEffect(() => {
     // Nếu là thiết bị di động (chiều rộng <= 768), chỉ hiển thị 100 ảnh
     if (window.innerWidth <= 768) {
-      setImageCount(100);
+      setImageCount(50);
     }
   }, []);
 
