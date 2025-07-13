@@ -7,13 +7,11 @@ import nhacnen from '../assets/sound/leduongBg.mp3';
 
 export default function LetterPage() {
   const [opened, setOpened] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
 
   useEffect(() => {
     const openTimer = setTimeout(() => {
       setOpened(true);
-      setIsPlaying(true);
       if (audioRef.current) {
         audioRef.current.play().catch((error) => {
           console.error('Lỗi khi phát nhạc tự động:', error);
@@ -24,22 +22,9 @@ export default function LetterPage() {
     return () => clearTimeout(openTimer);
   }, []);
 
-  const toggleAudio = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play().catch((error) => {
-          console.error('Lỗi khi phát nhạc:', error);
-        });
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
   return (
     <div className="letter-wrapper">
-      {/* Nhạc nền */}
+      {/* Nhạc nền tự phát */}
       <audio ref={audioRef} loop>
         <source src={nhacnen} type="audio/mpeg" />
         Trình duyệt của bạn không hỗ trợ audio.
@@ -48,8 +33,6 @@ export default function LetterPage() {
       {/* Hiệu ứng và nội dung */}
       {opened && <FallingImages />}
       <LetterContent opened={opened} />
-
-      
     </div>
   );
 }
