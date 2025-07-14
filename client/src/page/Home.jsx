@@ -21,7 +21,12 @@ const Home = () => {
     onClick={handleOpenGift}
   >
     <div className={styles['gift-lid']}></div>
-    <div className={styles['gift-bow']}></div>
+  <div
+  className={`${styles['gift-bow']} ${isOpened ? styles['bow-hidden'] : ''}`}
+></div>
+<div
+  className={`${styles['gift-bow-ribbon']} ${isOpened ? styles['bow-hidden'] : ''}`}
+></div>
     <div className={styles['gift-body']}></div>
     <div className={styles['gift-ribbon-vertical']}></div>
     <span className={styles['gift-text']}>Mở Quà</span>

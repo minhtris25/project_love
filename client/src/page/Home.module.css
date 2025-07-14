@@ -43,11 +43,11 @@ body {
 }
 
 .envelope__tab {
-  left: 28px;
+  left: 23px;
   z-index: 1;
-  bottom: 26px;
+  bottom: 18px;
   width: 212px;
-  height: 150px;
+  height: 160px;
   position: absolute;
   transform: rotateZ(45deg);
   border-top-left-radius: 30px;
@@ -62,7 +62,7 @@ body {
   bottom: 17px;
   height: 100px;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 13.5px;
   font-style: oblique;
   padding: 12px 18px;
   border-radius: 8px;
@@ -226,32 +226,50 @@ body {
   top: -25px;
   left: 50%;
   transform: translateX(-50%);
-  width: 50px;
+  width: 60px;
   height: 30px;
-  background: #ff3333; /* Màu đỏ để dễ thấy */
-  border-radius: 50% 50% 0 0;
-  z-index: 5;
+  background-color: transparent;
+  z-index: 6;
 }
 
+/* Hai vòng cung của nơ */
 .gift-bow::before,
 .gift-bow::after {
   content: '';
   position: absolute;
-  width: 50px;
+  width: 30px;
   height: 30px;
-  background: #ff3333;
-  border-radius: 50% 50% 0 0;
+  background-color: #ffffff;
+  border-radius: 50%;
   top: 0;
-  z-index: 5;
 }
 
 .gift-bow::before {
-  left: -25px;
+  left: 0;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
 
 .gift-bow::after {
-  left: 25px;
+  right: 0;
+  clip-path: polygon(100% 0, 0 50%, 100% 100%);
 }
+.gift-bow-ribbon {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 25px;
+  background-color: #ff3333;
+  border-radius: 4px;
+  z-index: 4;
+}
+.bow-hidden {
+  opacity: 0;
+  transform: translateY(-30px) scale(0.5) rotate(-45deg);
+  transition: all 0.4s ease-in-out;
+}
+
 
 /* Đảm bảo container cha không cắt xén */
 .gift-container,

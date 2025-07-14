@@ -63,8 +63,8 @@ export default function FallingImages() {
     <div className="floating-images-container">
       {Array.from({ length: imageCount }).map((_, index) => {
         const size = isMobile
-          ? Math.random() * 30 + 20 // nhỏ hơn cho mobile
-          : Math.random() * 80 + 30;
+          ? Math.random() * 50 + 30 // nhỏ hơn cho mobile
+          : Math.random() * 100 + 40;
         const startPosition = Math.random() * 100;
         const delay = Math.random() * 30;
         const duration = isMobile

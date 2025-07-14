@@ -16,7 +16,7 @@ const texts = [
   "",
   "1500 ngày chỉ là một dấu mốc, và còn hàng ngàn, hàng vạn ngày khác đang chờ chúng ta phía trước. Anh mong rằng chúng ta sẽ luôn nắm tay nhau thật chặt, cùng nhau vượt qua mọi sóng gió, để mỗi ngày trôi qua đều là một kỷ niệm đẹp.😘 ",
   "",
-  "Anh hứa sẽ luôn yêu thương, chăm sóc và bảo vệ em. Anh sẽ là người bạn đồng hành, là bờ vai vững chắc để em dựa vào trong những lúc khó khăn. Anh sẽ luôn lắng nghe và thấu hiểu em, để chúng ta có thể cùng nhau vượt qua mọi thử thách.💝",
+  "Anh sẽ luôn yêu thương, chăm sóc và bảo vệ em. Anh sẽ là người bạn đồng hành, là bờ vai vững chắc để em dựa vào trong những lúc khó khăn. Anh sẽ luôn lắng nghe và thấu hiểu em, để chúng mình có thể cùng nhau vượt qua mọi thử thách.💝",
   "",
   "Anh  sẽ mãi yêu em,",
   "Người anh thương nhất",
@@ -45,7 +45,7 @@ export default function LetterContent({ opened }) {
           audio.volume = 0.15;
           audio.play();
         }
-      }, isMobile ? 35 : 60);
+      }, isMobile ? 50 : 60);
 
       return () => clearTimeout(timeout);
     } else {
@@ -61,10 +61,17 @@ export default function LetterContent({ opened }) {
 
   return (
     <div className="letter-wrapper">
+      <div className='flap'  />
       {!opened && (
+        
         <div className="envelope">
+         
           <div className="flap" />
-          <div className="body" />
+          <div className="body" >
+            <div className="tab" />
+            <div className="letter"/>
+              
+          </div>
         </div>
       )}
 
